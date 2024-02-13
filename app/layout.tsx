@@ -2,6 +2,14 @@
 // Importing part
 import { ReactNode } from 'react';
 import { Metadata } from 'next';
+import { Roboto } from 'next/font/google';
+import '@/app/index.css';
+
+// Defining the font 
+const RobotFont = Roboto({
+  weight: ['300', '500', '700'],
+  subsets: ['latin'],
+});
 
 // Defining and exporting metadata of pages
 export const metadata:Metadata = {
@@ -26,8 +34,10 @@ interface propsType {
 export default function RootLayout({children}:propsType):ReactNode {
   // Returning JSX
   return (
-    <>
-      {children}
-    </>
+    <html>
+      <body className={`overflow-x-hidden ${RobotFont.className}`}>
+        {children}
+      </body>
+    </html>
   );
 }
