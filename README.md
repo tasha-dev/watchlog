@@ -21,6 +21,8 @@ WatchLog is a Next.js application designed to simplify the tracking of your watc
 - Typescript
 - Firebase
 ## Contributing
+
 Contributions are welcome! Feel free to open issues or submit pull requests.
+
 ---
 Happy watching! 🍿🎬
