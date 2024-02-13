@@ -35,7 +35,7 @@ export default function RootLayout({children}:propsType):ReactNode {
   // Returning JSX
   return (
     <html>
-      <body className={`overflow-x-hidden ${RobotFont.className}`}>
+      <body className={`overflow-x-hidden ${RobotFont.className} bg-lightBg dark:bg-darkBg`}>
         {children}
       </body>
     </html>
