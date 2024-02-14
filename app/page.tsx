@@ -8,6 +8,7 @@ import FirstSectionComponent from "@/component/page/home/logged/firstSectionComp
 import PageComponent from "@/component/pageComponent";
 import TitleComponent from "@/chunk/titleComponent";
 import { ReactNode, useState } from "react";
+import SecondSectionComponent from "@/component/page/home/logged/secondSectionComponent";
 
 // Creating and exporting the home page as default
 export default function HomePage():ReactNode {
@@ -24,6 +25,7 @@ export default function HomePage():ReactNode {
           ) : (
             <>
               <FirstSectionComponent />
+              <SecondSectionComponent />
             </>
           )
       }
