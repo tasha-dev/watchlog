@@ -27,17 +27,17 @@ export default function DropdownComponent({title, children}:propsType):ReactNode
             : setOpened(true);
         }}
         data-opened={opened}
-        className="px-[20px] transition-all duration-500 py-[10px] rounded-[10px] bg-black/20 flex items-center justify-between text-[12px] text-white border data-[opened='true']:border-violet-500 data-[opened='false']:border-transparent"
+        className="px-[20px] transition-all duration-500 py-[10px] rounded-[10px] bg-black/20 flex items-center justify-between text-[12px] text-white border data-[opened='true']:border-violet-500 data-[opened='false']:border-transparent shadow-xl data-[opened='true']:shadow-violet-500/20 data-[opened='false']:shadow-transparent"
       >
         {title}
         <i className="ml-[20px] tex-text-white"><IconComponent size={10} name="chev-down" /></i>
       </button>
-      <div 
+      <ul
         data-opened={opened}
-        className="absolute top-[130%] transition-all duration-500 origin-top-right right-0 bg-black/20 py-[20px] rounded-[10px] backdrop-blur w-[220px] border border-violet-500 data-[opened='false']:scale-0 data-[opened='false']:opacity-0 data-[opened='true']:scale-100 data-[opened='true']:opacity-100"
+        className="absolute top-[130%] transition-all duration-500 origin-top-right right-0 bg-black/20 py-[20px] rounded-[10px] backdrop-blur w-[220px] border border-violet-500 data-[opened='false']:scale-90 data-[opened='false']:opacity-0 data-[opened='true']:scale-100 data-[opened='true']:opacity-100"
       >
         {children}
-      </div>  
+      </ul>  
     </div>
   );
 }
