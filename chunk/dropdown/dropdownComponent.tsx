@@ -34,7 +34,7 @@ export default function DropdownComponent({title, children}:propsType):ReactNode
       </button>
       <ul
         data-opened={opened}
-        className="absolute z-30 top-[130%] transition-all duration-500 origin-top-right right-0 bg-violet-950 py-[20px] rounded-[10px] w-[220px] border border-violet-500 data-[opened='false']:scale-90 data-[opened='false']:opacity-0 data-[opened='true']:scale-100 data-[opened='true']:opacity-100"
+        className="absolute z-30 top-[130%] transition-all duration-500 origin-top-right right-0 bg-violet-950 py-[20px] rounded-[10px] w-[220px] border border-violet-500 data-[opened='false']:scale-90 data-[opened='false']:opacity-0 data-[opened='true']:scale-100 data-[opened='true']:opacity-100 data-[opened='false']:invisible data-[opened='true']:visible"
       >
         {children}
       </ul>  

@@ -10,7 +10,7 @@ interface propsType {
 }
 
 // Creating and exporting the title component as default
-export default function TitleComponent({tier, children, noMargin}:propsType):ReactNode {
+export default function TitleComponent({tier, children, noMargin = false}:propsType):ReactNode {
   // Conditional rendering
   if (tier === 1) {
     return (
