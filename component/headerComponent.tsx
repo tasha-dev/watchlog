@@ -15,11 +15,12 @@ export default function HeaderComponent():ReactNode {
       <ContainerComponent size="large" className="flex items-center justify-between gap-[20px]">
         <TitleComponent noMargin tier={1} theme="dark">WatchLog</TitleComponent>
         <div className="flex items-center justify-between gap-[20px]">
-          <ButtonComponent link="/login">Log In</ButtonComponent>
+          <ButtonComponent className="lg:flex hidden" link="/login">Log In</ButtonComponent>
           <DropdownComponent title="Links">
-            <DropDownLinkComponent link="#">Link 1</DropDownLinkComponent> 
+            <DropDownLinkComponent link="#">Link 1</DropDownLinkComponent>
+            <DropDownLinkComponent link="#">Link 1</DropDownLinkComponent>
             <DropDownLinkComponent link="#">Link 2</DropDownLinkComponent>
-            <DropDownLinkComponent link="#">Link 3</DropDownLinkComponent>
+            <DropDownLinkComponent className="lg:hidden block" link="/login">Login</DropDownLinkComponent>
           </DropdownComponent>
         </div>
       </ContainerComponent>
