@@ -4,6 +4,7 @@ import type { Config } from "tailwindcss";
 
 // Defining configs of tailwindcss
 const config: Config = {
+  darkMode: 'class',
   content: [
     './app/*.{ts,tsx,js,jsx}',
     './app/**/*.{ts,tsx,js,jsx}',

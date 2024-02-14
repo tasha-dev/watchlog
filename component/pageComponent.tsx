@@ -4,8 +4,9 @@
 
 // Importing part
 import { useRouter } from "next/navigation";
-import { ReactNode, useState } from "react";
+import { ReactNode, useEffect, useState } from "react";
 import HeaderComponent from "./headerComponent";
+import { useTheme } from "@/app/store";
 
 // Defining type of props
 interface propsType {
@@ -18,6 +19,18 @@ export default function PageComponent({loginRequired, children}:propsType):React
   // Defining states of the component
   // TODO:Remove With Firebase Later
   const [userLoggedIn, setUserLoggedIn] = useState<boolean>(false);
+
+  // Defining theme
+  const { theme } = useTheme();
+
+  // Using useEffect to get data changes of theme
+  useEffect(() => {
+    const htmlElement:Element | null = document.querySelector('html');
+
+    (theme === 'dark')
+      ? htmlElement?.classList.add('dark') 
+      : htmlElement?.classList.remove('dark')
+  }, [theme])
 
   // Defining router 
   const router = useRouter();
