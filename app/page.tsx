@@ -3,12 +3,12 @@
 'use client';
 
 // Importing part
-import ContainerComponent from "@/chunk/containerComponent";
 import FirstSectionComponent from "@/component/page/home/logged/firstSectionComponent";
 import PageComponent from "@/component/pageComponent";
 import TitleComponent from "@/chunk/titleComponent";
 import { ReactNode, useState } from "react";
 import SecondSectionComponent from "@/component/page/home/logged/secondSectionComponent";
+import ThirdSectionComponent from "@/component/page/home/logged/thirdSectionComponent";
 
 // Creating and exporting the home page as default
 export default function HomePage():ReactNode {
@@ -26,6 +26,7 @@ export default function HomePage():ReactNode {
             <>
               <FirstSectionComponent />
               <SecondSectionComponent />
+              <ThirdSectionComponent />
             </>
           )
       }
