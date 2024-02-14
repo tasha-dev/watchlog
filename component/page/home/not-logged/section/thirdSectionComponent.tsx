@@ -13,7 +13,7 @@ export default function ThirdSectionComponent():ReactNode {
   return (
     <section>
       <ContainerComponent size="large" className="grid lg:grid-cols-2 grid-cols-1 gap-[20px]">
-        <Image className="aspect-square lg:h-auto h-[150px] object-cover rounded-[20px]" width={1024} height={1024} alt="Image of a boy watching tv" src={mainImage.src}  />
+        <Image className="aspect-square lg:h-auto h-[150px] object-cover rounded-[20px]" width={1024} height={1024} alt="Image of a teenage girl in cinema" src={mainImage.src}  />
         <div>  
           <TitleComponent tier={1}>Efficiency Meets Enjoyment</TitleComponent>
           <ParagraphComponent>Immerse yourself in a streamlined entertainment experience with WatchLog. Efficiently manage your watched content, create a comprehensive log, and rediscover the joy of entertainment tracking. Start your personalized journey today, and make every viewing moment memorable.</ParagraphComponent>

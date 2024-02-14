@@ -4,7 +4,7 @@ import { ReactNode } from "react";
 
 // Defining type of prop
 interface propsType {
-  tier: 1 | 2 | 3;
+  tier: 0 | 1 | 2 | 3;
   children: ReactNode;
   noMargin?: boolean;
 }
@@ -12,7 +12,16 @@ interface propsType {
 // Creating and exporting the title component as default
 export default function TitleComponent({tier, children, noMargin = false}:propsType):ReactNode {
   // Conditional rendering
-  if (tier === 1) {
+  if (tier === 0) {
+    return (
+      <h1 
+        data-has-margin={(noMargin === false)}
+        className="lg:text-[42px] text-[32px] font-bold lg:data-[has-margin='true']:mb-[20px] data-[has-margin='true']:mb-[10px] text-lightText dark:text-darkText"
+      >
+        {children}
+      </h1>
+    );
+  } else if (tier === 1) {
     return (
       <h1 
         data-has-margin={(noMargin === false)}
@@ -30,7 +39,7 @@ export default function TitleComponent({tier, children, noMargin = false}:propsT
         {children}
       </h3>
     );
-  } else {
+  } else if (tier === 3) {
     return (
       <h6
         data-has-margin={(noMargin === false)}

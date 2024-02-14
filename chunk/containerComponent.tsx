@@ -17,7 +17,7 @@ export default function ContainerComponent({children, size, className}:propsType
       className={
         (size === 'large') 
           ? `max-w-[1000px] mx-auto p-[20px] ${(className) ? className : ''}`
-          : `max-w-[500px] mx-auto p-[20px] ${(className) ? className : ''}`
+          : `max-w-[750px] mx-auto p-[20px] ${(className) ? className : ''}`
       }
     >
       {children}

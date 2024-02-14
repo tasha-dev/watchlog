@@ -17,7 +17,7 @@ export default function SecondSectionComponent():ReactNode {
           <TitleComponent tier={1}>Tailor Your Watchlist, Your Way</TitleComponent>
           <ParagraphComponent noMargin>WatchLog features a modern user interface designed for personalization. Tailor your watchlist with ease, adjusting settings to match your unique preferences. Whether you prefer a light or dark mode experience, WatchLog adapts to your style, providing an enjoyable and customizable viewing history.</ParagraphComponent>
         </div>
-        <Image className="aspect-square lg:h-auto h-[150px] object-cover rounded-[20px]" width={1024} height={1024} alt="Image of a boy watching tv" src={mainImage.src}  />
+        <Image className="aspect-square lg:h-auto h-[150px] object-cover rounded-[20px]" width={1024} height={1024} alt="Image of a family having fun" src={mainImage.src}  />
       </ContainerComponent>
     </section>
   );

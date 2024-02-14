@@ -18,7 +18,7 @@ interface propsType {
 export default function PageComponent({loginRequired, children}:propsType):ReactNode {
   // Defining states of the component
   // TODO:Remove With Firebase Later
-  const [userLoggedIn, setUserLoggedIn] = useState<boolean>(false);
+  const [userLoggedIn, setUserLoggedIn] = useState<boolean>(true);
 
   // Defining theme
   const { theme } = useTheme();
@@ -40,7 +40,7 @@ export default function PageComponent({loginRequired, children}:propsType):React
     // Returning JSX
     return (
       <div className="lg:mt-[100px] mt-0">
-        <HeaderComponent />
+        <HeaderComponent loggedIn={userLoggedIn} />
         {children}
       </div>
     );
