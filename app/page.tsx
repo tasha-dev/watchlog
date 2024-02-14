@@ -3,12 +3,10 @@
 'use client';
 
 // Importing part
-import FirstSectionComponent from "@/component/page/home/logged/firstSectionComponent";
 import PageComponent from "@/component/pageComponent";
 import TitleComponent from "@/chunk/titleComponent";
 import { ReactNode, useState } from "react";
-import SecondSectionComponent from "@/component/page/home/logged/secondSectionComponent";
-import ThirdSectionComponent from "@/component/page/home/logged/thirdSectionComponent";
+import NotLoggedInHomePage from "@/component/page/home/not-logged/notLoggedInHomePageComponent";
 
 // Creating and exporting the home page as default
 export default function HomePage():ReactNode {
@@ -22,13 +20,7 @@ export default function HomePage():ReactNode {
         (userLoggedIn)
           ? (
             <TitleComponent tier={1}>User Is Logged in</TitleComponent>
-          ) : (
-            <>
-              <FirstSectionComponent />
-              <SecondSectionComponent />
-              <ThirdSectionComponent />
-            </>
-          )
+          ) : <NotLoggedInHomePage /> 
       }
     </PageComponent>
   );

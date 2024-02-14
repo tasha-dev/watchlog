@@ -7,7 +7,7 @@ import { ReactNode } from "react";
 import Image from "next/image";
 import mainImage from '@/public/img/page/home/firstSection/img-boy-tv.jpg';
 
-// Creating and exporting first section of home page if user is logged in , as default
+// Creating and exporting first section of home page if user is not logged in , as default
 export default function FirstSectionComponent():ReactNode {
   // Returning JSX
   return (

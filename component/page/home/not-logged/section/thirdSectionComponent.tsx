@@ -7,7 +7,7 @@ import { ReactNode } from "react";
 import Image from "next/image";
 import mainImage from '@/public/img/page/home/thirdSection/img-girl-cinema.jpg';
 
-// Creating and exporting third section of home page if user is logged in , as default
+// Creating and exporting third section of home page if user is not logged in , as default
 export default function ThirdSectionComponent():ReactNode {
   // Returning JSX
   return (
