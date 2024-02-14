@@ -11,9 +11,9 @@ import DropDownLinkComponent from "@/chunk/dropdown/dropdownLinkComponent";
 export default function HeaderComponent():ReactNode {
   // Returning JSX
   return (
-    <header className="bg-darkBg fixed top-0 left-0 w-full z-20">
+    <header className="dark:bg-darkBg bg-lightBg fixed top-0 left-0 w-full z-20">
       <ContainerComponent size="large" className="flex items-center justify-between gap-[20px]">
-        <TitleComponent noMargin tier={1} theme="dark">WatchLog</TitleComponent>
+        <TitleComponent noMargin tier={1}>WatchLog</TitleComponent>
         <div className="flex items-center justify-between gap-[20px]">
           <ButtonComponent className="lg:flex hidden" link="/login">Log In</ButtonComponent>
           <DropdownComponent title="Links">
