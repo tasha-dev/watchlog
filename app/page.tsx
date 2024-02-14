@@ -1,5 +1,6 @@
 // Codes by mahdi tasha
 // Importing part
+import ContainerComponent from "@/chunk/containerComponent";
 import PageComponent from "@/component/pageComponent";
 import { ReactNode } from "react";
 
@@ -8,7 +9,9 @@ export default function HomePage():ReactNode {
   // Returning JSX
   return (
     <PageComponent>
-      Home Page
+      <ContainerComponent size="large">
+        <div className="h-[10000000px] bg-red-600 w-full " />
+      </ContainerComponent> 
     </PageComponent>
   );
 }

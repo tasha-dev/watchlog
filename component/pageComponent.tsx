@@ -26,7 +26,7 @@ export default function PageComponent({loginRequired, children}:propsType):React
   function ReturnedElements():ReactNode {
     // Returning JSX
     return (
-      <div>
+      <div className="lg:mt-[100px] mt-0">
         <HeaderComponent />
         {children}
       </div>
