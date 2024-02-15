@@ -15,7 +15,9 @@ import Link from "next/link";
 // Defining type of form
 const formSchema = z.object({
   email: z.string().email(),
-  password: z.string().min(8).max(12)
+  name: z.string().min(5).max(100),
+  password: z.string().min(8).max(12), 
+  passwordRepeat: z.string().min(8).max(12),
 });
 
 type formType = z.infer<typeof formSchema>;
@@ -26,6 +28,7 @@ export default function FormComponent():ReactNode {
   const {
     handleSubmit,
     register,
+    setError,
     formState: {
       errors,
       isValidating
@@ -36,16 +39,22 @@ export default function FormComponent():ReactNode {
 
   // Defining a function to handle submit event
   const onSubmitFn:SubmitHandler<formType> = (data) => {
-    console.log(data);
+    if (data.passwordRepeat !== data.password) {
+      setError('root', {message: 'The password and its repeat , are not equal in value'})
+    } else {
+      console.log(data);
+    }
   }
 
   // Returning JSX
   return (
     <form onSubmit={handleSubmit(onSubmitFn)} className="w-full px-[20px] pb-[20px] pt-[40px] border border-violet-500 rounded-[10px] relative">
-      <TitleComponent tier={1} className="px-[20px] absolute dark:bg-darkBg bg-lightBg top-0 -translate-y-[50%] left-[50px]">Login</TitleComponent>
+      <TitleComponent tier={1} className="px-[20px] absolute dark:bg-darkBg bg-lightBg top-0 -translate-y-[50%] left-[50px]">Sign up</TitleComponent>
       <div className="grid lg:grid-cols-2 grid-cols-1 gap-[20px]">
         <InputComponent label="Email" errorText={errors.email?.message} register={register} registerName="email"/>
+        <InputComponent label="Name" errorText={errors.name?.message} register={register} registerName="name"/>
         <InputComponent label="Password" errorText={errors.password?.message} register={register} registerName="password"/>
+        <InputComponent label="Password Repeat" errorText={errors.passwordRepeat?.message} register={register} registerName="passwordRepeat"/>
         <SubmitBtnComponent isValidating={isValidating} className="lg:col-span-2 col-span-1"/>
       </div> 
       {
@@ -58,8 +67,8 @@ export default function FormComponent():ReactNode {
             </div>
             ) : false
       }
-      <TitleComponent tier={2} className="mt-[20px]" noMargin>
-        If yout dont already have an account: <Link href="/sign-up" className="underline">Sign Up</Link>
+      <TitleComponent noMargin tier={2} className="mt-[20px]">
+        If already have an account: <Link href="/login" className="underline">Login</Link>
       </TitleComponent> 
     </form>
   );
