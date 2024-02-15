@@ -7,6 +7,7 @@ import ButtonComponent from "@/chunk/buttonComponent";
 import DropdownComponent from "@/chunk/dropdown/dropdownComponent";
 import DropDownLinkComponent from "@/chunk/dropdown/dropdownLinkComponent";
 import ThemeTogglerComponent from "@/chunk/dropdown/themeTogglerComponent";
+import Link from "next/link";
 
 // Defining type of props
 interface propsType {
@@ -19,7 +20,9 @@ export default function HeaderComponent({loggedIn}:propsType):ReactNode {
   return (
     <header className="dark:bg-darkBg/30 bg-lightBg/30 lg:fixed static top-0 left-0 w-full z-20 backdrop-blur-xl">
       <ContainerComponent size="large" className="flex items-center justify-between gap-[20px]">
-        <TitleComponent noMargin tier={1}>WatchLog</TitleComponent>
+        <Link href={'/'}>
+          <TitleComponent noMargin tier={1}>WatchLog</TitleComponent>
+        </Link>
         <div className="flex items-center justify-between gap-[20px]">
           {
             (!loggedIn)
