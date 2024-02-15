@@ -21,5 +21,5 @@ export const useTheme = create<themeStateType>((set) => ({
 }));
 
 export const useAuth = create<authStateType>(() => ({
-  loggedIn: false
+  loggedIn: true
 }))
