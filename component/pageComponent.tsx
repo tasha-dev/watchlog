@@ -6,7 +6,7 @@
 import { useRouter } from "next/navigation";
 import { ReactNode, useEffect, useState } from "react";
 import HeaderComponent from "./headerComponent";
-import { useTheme } from "@/app/store";
+import { useAuth, useTheme } from "@/app/store";
 
 // Defining type of props
 interface propsType {
@@ -18,7 +18,7 @@ interface propsType {
 export default function PageComponent({loginRequired, children}:propsType):ReactNode {
   // Defining states of the component
   // TODO:Remove With Firebase Later
-  const [userLoggedIn, setUserLoggedIn] = useState<boolean>(true);
+  const { loggedIn } = useAuth();
 
   // Defining theme
   const { theme } = useTheme();
@@ -40,7 +40,7 @@ export default function PageComponent({loginRequired, children}:propsType):React
     // Returning JSX
     return (
       <div className="lg:mt-[100px] mt-0">
-        <HeaderComponent loggedIn={userLoggedIn} />
+        <HeaderComponent loggedIn={loggedIn} />
         {children}
       </div>
     );
@@ -48,7 +48,7 @@ export default function PageComponent({loginRequired, children}:propsType):React
 
   // Conditional rendering
   if (loginRequired) {
-    if (userLoggedIn) {return <ReturnedElements />} 
+    if (loggedIn) {return <ReturnedElements />} 
     else {router.push('/login');}
   } else {return <ReturnedElements />}
 }

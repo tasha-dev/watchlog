@@ -4,21 +4,21 @@
 
 // Importing part
 import PageComponent from "@/component/pageComponent";
-import TitleComponent from "@/chunk/titleComponent";
-import { ReactNode, useState } from "react";
+import { ReactNode } from "react";
 import NotLoggedInHomePage from "@/component/page/home/not-logged/notLoggedInHomePageComponent";
 import LoggedInHomePage from "@/component/page/home/logged/loggedInHomePage";
+import { useAuth } from "./store";
 
 // Creating and exporting the home page as default
 export default function HomePage():ReactNode {
   // Defining state of component
-  const [userLoggedIn, setUserLoggedIn] = useState<boolean>(true);
+  const { loggedIn } = useAuth();
 
   // Returning JSX
   return (
     <PageComponent> 
       {
-        (userLoggedIn)
+        (loggedIn)
           ? <LoggedInHomePage />
           : <NotLoggedInHomePage /> 
       }
