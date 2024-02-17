@@ -6,7 +6,9 @@
 import { useRouter } from "next/navigation";
 import { ReactNode, useEffect, useState } from "react";
 import HeaderComponent from "./headerComponent";
-import { useAuth, useTheme } from "@/app/store";
+import { useTheme } from "@/app/store";
+import useFirebaseAuth from "@/hook/useFirebaseAuth";
+import LoadingComponent from "@/chunk/loadingComponent";
 
 // Defining type of props
 interface propsType {
@@ -16,9 +18,8 @@ interface propsType {
 
 // Creating and exporting page component as default
 export default function PageComponent({loginRequired, children}:propsType):ReactNode {
-  // Defining states of the component
-  // TODO:Remove With Firebase Later
-  const { loggedIn } = useAuth();
+  // Defining auth
+  const auth = useFirebaseAuth();
 
   // Defining theme
   const { theme } = useTheme();
@@ -40,15 +41,23 @@ export default function PageComponent({loginRequired, children}:propsType):React
     // Returning JSX
     return (
       <div className="lg:mt-[100px] mt-0">
-        <HeaderComponent loggedIn={loggedIn} />
+        <HeaderComponent loggedIn={(auth.user === null)} />
         {children}
       </div>
     );
   }
 
   // Conditional rendering
-  if (loginRequired) {
-    if (loggedIn) {return <ReturnedElements />} 
-    else {router.push('/login');}
-  } else {return <ReturnedElements />}
+  if (auth.loading) {
+    return (
+      <div className="flex justify-center items-center dark:bg-darkBg bg-lightBg fixed top-0 left-0 w-full h-full z-20">
+        <LoadingComponent />
+      </div>
+    );
+  } else {
+    if (loginRequired) {
+      if (auth.user !== null) {return <ReturnedElements />} 
+      else {router.push('/login');}
+    } else {return <ReturnedElements />}
+  }
 }
