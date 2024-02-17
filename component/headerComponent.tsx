@@ -1,6 +1,7 @@
 // Codes by mahdi tasha
+// Forcing nextJS to render this component as client side component
 // Importing part
-import { ReactNode } from "react";
+import { Dispatch, ReactNode } from "react";
 import ContainerComponent from "@/chunk/containerComponent";
 import TitleComponent from "@/chunk/titleComponent";
 import ButtonComponent from "@/chunk/buttonComponent";
@@ -8,14 +9,17 @@ import DropdownComponent from "@/chunk/dropdown/dropdownComponent";
 import DropDownLinkComponent from "@/chunk/dropdown/dropdownLinkComponent";
 import ThemeTogglerComponent from "@/chunk/dropdown/themeTogglerComponent";
 import Link from "next/link";
+import { getAuth } from "firebase/auth";
 
 // Defining type of props
 interface propsType {
   loggedIn: boolean;
+  theme: 'dark' | 'light';
+  setTheme: Dispatch<'dark' | 'light'>;
 }
 
 // Creating and exporting header component as default
-export default function HeaderComponent({loggedIn}:propsType):ReactNode {
+export default function HeaderComponent({loggedIn, theme, setTheme}:propsType):ReactNode {
   // Returning JSX
   return (
     <header className="dark:bg-darkBg/30 bg-lightBg/30 lg:fixed static top-0 left-0 w-full z-20 backdrop-blur-xl">
@@ -30,11 +34,11 @@ export default function HeaderComponent({loggedIn}:propsType):ReactNode {
               : false
           } 
           <DropdownComponent title="Links">
-            <ThemeTogglerComponent />
+            <ThemeTogglerComponent theme={theme} setTheme={setTheme} />
             {
               (!loggedIn)
                 ? <DropDownLinkComponent className="lg:hidden block" link="/login">Login</DropDownLinkComponent>
-                : false
+                : <button onClick={() => getAuth().signOut()} className="px-[10px] py-[5px] bg-red-500 text-white w-full block truncate transition-all duration-500 text-left hover:bg-red-800 text-[14px] font-normal">Log out</button>
             }
           </DropdownComponent>
         </div>
