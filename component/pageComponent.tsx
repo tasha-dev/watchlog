@@ -41,7 +41,7 @@ export default function PageComponent({loginRequired, children}:propsType):React
     // Returning JSX
     return (
       <div className="lg:mt-[100px] mt-0">
-        <HeaderComponent loggedIn={(auth.user === null)} />
+        <HeaderComponent loggedIn={(auth.user !== null)} />
         {children}
       </div>
     );

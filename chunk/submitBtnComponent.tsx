@@ -15,7 +15,7 @@ export default function SubmitBtnComponent({isValidating, className}:propsType):
     return (
         <button 
           disabled={isValidating} 
-          className={`px-[20px] py-[10px] rounded-[10px] font-normal text-[12px] text-white bg-violet-500 transition-all duration-500 hover:bg-violet-700 ${(className) ? className : ''}`}
+          className={`px-[20px] py-[10px] flex items-center justify-center text-center rounded-[10px] font-normal text-[12px] text-white bg-violet-500 transition-all duration-500 hover:bg-violet-700 ${(className) ? className : ''}`}
         >
             {
                 (isValidating)

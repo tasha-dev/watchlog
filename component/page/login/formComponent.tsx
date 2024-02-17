@@ -3,14 +3,16 @@
 'use client';
 
 // Importing part
-import { ReactNode } from "react";
+import { ReactNode, useState } from "react";
 import InputComponent from "@/chunk/inputComponent";
 import { SubmitHandler, useForm } from "react-hook-form";
-import { z } from 'zod'
+import { date, z } from 'zod'
 import { zodResolver } from "@hookform/resolvers/zod";
 import TitleComponent from "@/chunk/titleComponent";
 import SubmitBtnComponent from "@/chunk/submitBtnComponent";
 import Link from "next/link";
+import { signInWithEmailAndPassword, getAuth } from "firebase/auth";
+import { useRouter } from "next/navigation";
 
 // Defining type of form
 const formSchema = z.object({
@@ -22,21 +24,37 @@ type formType = z.infer<typeof formSchema>;
 
 // Creating and exporting form component as default
 export default function FormComponent():ReactNode {
+  // Defining states of component
+  const [isValidating, setValidating] = useState<boolean>(false);
+
   // Defining use form hook
   const {
     handleSubmit,
+    setError,
     register,
-    formState: {
-      errors,
-      isValidating
-    },
+    formState: {errors},
   } = useForm<formType>({
     resolver: zodResolver(formSchema)
   });
 
+  // Defining router
+  const router = useRouter();
+
   // Defining a function to handle submit event
   const onSubmitFn:SubmitHandler<formType> = (data) => {
-    console.log(data);
+    setValidating(true);
+
+    const auth = getAuth();
+
+    signInWithEmailAndPassword(auth, data.email, data.password)
+      .then(() => {
+        setValidating(false); 
+        router.push('/')
+      })
+      .catch(() => {
+        setValidating(false);
+        setError('root', {message: 'There was an error. Please try again'})
+      })
   }
 
   // Returning JSX
