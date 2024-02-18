@@ -136,7 +136,20 @@ export default function MovieListComponent({title, list}:propsType):ReactNode {
               ) : <TitleComponent tier={2}>There is nothing to show</TitleComponent>
           }  
         </ul>
-        <TitleComponent noMargin tier={1} className="text-center">All stars : {list?.map((item:dataType) => Number(item.score)).reduce((first:number, second:number) => first + second)}⭐</TitleComponent>
+        {
+          (list && list.length !== 0)
+            ? <TitleComponent 
+                noMargin 
+                tier={1}
+                className="text-center"
+              >
+              All stars : 
+              {
+                list?.map((item:dataType) => Number(item.score))
+                .reduce((first:number, second:number) => first + second)}⭐
+              </TitleComponent>
+            : false
+        }
     </div>
   );
 }
