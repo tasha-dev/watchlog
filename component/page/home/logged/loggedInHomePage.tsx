@@ -3,11 +3,14 @@
 'use client';
 
 // Importing part
-import { ReactNode } from "react";
+import { ReactNode, useEffect, useState } from "react";
 import ContainerComponent from "@/chunk/containerComponent";
 import Image from "next/image";
 import mainImage from '@/public/img/page/home/firstSection/img-boy-tv.jpg';
 import MovieListComponent from "@/chunk/movieListComponent";
+import useFirebaseApp from "@/hook/useFirebaseApp";
+import { DataSnapshot, getDatabase, onValue, ref } from "firebase/database";
+import useFirebaseAuth from "@/hook/useFirebaseAuth";
 
 // Defining types
 interface dataType {
@@ -18,18 +21,71 @@ interface dataType {
 
 // Creating and exporting logged in home page as default
 export default function LoggedInHomePage():ReactNode {
-  // Defining some dummy data
-  const movies:dataType[] = [{
-    name: 'Blonde',
-    score: 3,
-    addedDate: new Date()
-  }, {
-    name: 'X',
-    score: 2,
-    addedDate: new Date()
-  }];
+  // Defining states of component
+  const [movies, setMovies] = useState<dataType[]>([]);
+  const [series, setSeries] = useState<dataType[]>([]);
 
-  const series:dataType[] = [];
+  // Getting data from firebase
+  const app = useFirebaseApp();
+  const auth = useFirebaseAuth();
+
+  useEffect(() => { 
+    if (auth.user) {
+      const database = getDatabase();
+      const databaseRefMovies = ref(database, `/movies/${auth.user.uid}`);
+      const databaseRefSeries = ref(database, `/series/${auth.user.uid}`);
+
+     onValue(databaseRefMovies, (snapshot:DataSnapshot) => {
+        const value: {} | null = snapshot.val();
+        const array:dataType[] | [null] = [];
+
+        if (value !== null && Object.keys(value).length !== 0) {
+          for (const key in value) {
+            if (value.hasOwnProperty(key)) {
+              // @ts-ignore
+              const item:dataType = value[key];
+              const addedDate = item.addedDate;
+              const name = item.name;
+              const score = item.score;
+
+              array.push({
+                name: name,
+                score: score,
+                addedDate: new Date(addedDate)
+              })
+            }
+          }
+        }
+
+        setMovies(array);
+      }) 
+
+      onValue(databaseRefSeries, (snapshot:DataSnapshot) => {
+        const value: {} | null = snapshot.val();
+        const array:dataType[] | [null] = [];
+
+        if (value !== null && Object.keys(value).length !== 0) {
+          for (const key in value) {
+            if (value.hasOwnProperty(key)) {
+              // @ts-ignore
+              const item:dataType = value[key];
+              const addedDate = item.addedDate;
+              const name = item.name;
+              const score = item.score;
+
+              array.push({
+                name: name,
+                score: score,
+                addedDate: new Date(addedDate)
+              })
+            }
+          }
+        }
+
+        setSeries(array);
+      })
+    }
+  }, [auth])
 
   // Returning JSX
   return (

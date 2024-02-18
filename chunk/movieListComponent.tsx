@@ -13,7 +13,7 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import InputComponent from "./inputComponent";
 import SubmitBtnComponent from "./submitBtnComponent";
 import useFirebaseApp from "@/hook/useFirebaseApp";
-import { getDatabase, ref, set } from "firebase/database";
+import { getDatabase, push, ref, set } from "firebase/database";
 import useFirebaseAuth from "@/hook/useFirebaseAuth";
 
 // Defining type of props
@@ -25,7 +25,7 @@ interface dataType {
 
 interface propsType {
   title: 'movies' | 'series';
-  list: dataType[];
+  list: dataType[] | undefined;
 }
 
 // Defining type of form
@@ -46,33 +46,33 @@ export default function MovieListComponent({title, list}:propsType):ReactNode {
   const {
     register,
     setError,
+    setValue,
     handleSubmit,
     formState: {errors}
   } = useForm<formType>({
     resolver: zodResolver(formSchema)
   });
 
-  // Defining firebase 
-  const auth = useFirebaseAuth();
   const firebaseApp = useFirebaseApp();
-  const database = getDatabase(firebaseApp);
-  const databaseRef = ref(database, '/');
-
-  useEffect(() => {
-    console.log(auth);
-  }, [])
+  const auth = useFirebaseAuth();
 
   // Defining a function to handle submit of form
-  const onSubmitHandler:SubmitHandler<formType> = (data) => {
+  const onSubmitHandler:SubmitHandler<formType> = (data) => { 
+    const database = getDatabase(firebaseApp);
+    const databaseRef = ref(database, `/${title}/${auth.user.uid}`);
+
     setValidating(true);
 
-    set(databaseRef, {
-      massage: 'Happy'
+    push(databaseRef, {
+      name: data.name,
+      score: data.count,
+      addedDate: new Date().toISOString()
     })
      .then(() => {
-        setFormShowing(false);
-        setValidating(false);
-      })
+       setValidating(false);
+       setValue('name', '');
+       setValue('count', '');
+     })
      .catch(() => {
         setValidating(false);
         setError('root', {message: 'There was an error. Please try again.'})
@@ -118,9 +118,9 @@ export default function MovieListComponent({title, list}:propsType):ReactNode {
               </form>
             ) : false
         }
-        <ul className="flex flex-col gap-[10px]">
+        <ul className="flex flex-col gap-[10px]"> 
           {
-            (list.length !== 0)
+            (list && list.length !== 0)
               ? (
                 <>
                   {
@@ -136,6 +136,7 @@ export default function MovieListComponent({title, list}:propsType):ReactNode {
               ) : <TitleComponent tier={2}>There is nothing to show</TitleComponent>
           }  
         </ul>
+        <TitleComponent noMargin tier={1} className="text-center">All stars : {list?.map((item:dataType) => Number(item.score)).reduce((first:number, second:number) => first + second)}⭐</TitleComponent>
     </div>
   );
 }
