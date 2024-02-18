@@ -11,6 +11,7 @@ import MovieListComponent from "@/chunk/movieListComponent";
 import useFirebaseApp from "@/hook/useFirebaseApp";
 import { DataSnapshot, getDatabase, onValue, ref } from "firebase/database";
 import useFirebaseAuth from "@/hook/useFirebaseAuth";
+import LoadingComponent from "@/chunk/loadingComponent";
 
 // Defining types
 interface dataType {
@@ -24,6 +25,8 @@ export default function LoggedInHomePage():ReactNode {
   // Defining states of component
   const [movies, setMovies] = useState<dataType[]>([]);
   const [series, setSeries] = useState<dataType[]>([]);
+  const [moviesFetching, setMoviesFetching] = useState<boolean>(true);
+  const [seriesFetching, setSeriesFetching] = useState<boolean>(true);
 
   // Getting data from firebase
   const app = useFirebaseApp();
@@ -58,7 +61,8 @@ export default function LoggedInHomePage():ReactNode {
         }
 
         setMovies(array);
-      }) 
+        setMoviesFetching(false);
+      })
 
       onValue(databaseRefSeries, (snapshot:DataSnapshot) => {
         const value: {} | null = snapshot.val();
@@ -83,6 +87,7 @@ export default function LoggedInHomePage():ReactNode {
         }
 
         setSeries(array);
+        setSeriesFetching(false);
       })
     }
   }, [auth])
@@ -92,9 +97,23 @@ export default function LoggedInHomePage():ReactNode {
     <section>
       <Image width={1024} height={1024} alt="Image of a boy watching tv" src={mainImage.src} className="w-full h-[300px] object-cover" />
       <ContainerComponent size="small">
-        <MovieListComponent title="movies" list={movies} /> 
+        {
+          (moviesFetching)
+            ? (
+              <div className="h-[300px] flex items-center justify-center">
+                 <LoadingComponent />
+              </div>
+            ) : <MovieListComponent title="movies" list={movies} />
+        } 
         <div className="my-[20px] w-full h-[1px] dark:bg-lightBorder bg-darkBorder" />
-        <MovieListComponent title="series" list={series} />
+        {
+          (seriesFetching)
+            ? (
+              <div className="h-[300px] flex items-center justify-center">
+                 <LoadingComponent />
+              </div>
+            ) : <MovieListComponent title="series" list={series} />
+        } 
       </ContainerComponent>
     </section>
   );
