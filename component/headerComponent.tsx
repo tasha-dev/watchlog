@@ -14,12 +14,10 @@ import { getAuth } from "firebase/auth";
 // Defining type of props
 interface propsType {
   loggedIn: boolean;
-  theme: 'dark' | 'light';
-  setTheme: Dispatch<'dark' | 'light'>;
 }
 
 // Creating and exporting header component as default
-export default function HeaderComponent({loggedIn, theme, setTheme}:propsType):ReactNode {
+export default function HeaderComponent({loggedIn}:propsType):ReactNode {
   // Returning JSX
   return (
     <header className="dark:bg-darkBg/30 bg-lightBg/30 lg:fixed static top-0 left-0 w-full z-20 backdrop-blur-xl">
