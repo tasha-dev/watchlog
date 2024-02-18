@@ -34,7 +34,7 @@ export default function HeaderComponent({loggedIn, theme, setTheme}:propsType):R
               : false
           } 
           <DropdownComponent title="Links">
-            <ThemeTogglerComponent theme={theme} setTheme={setTheme} />
+            <ThemeTogglerComponent />
             {
               (!loggedIn)
                 ? <DropDownLinkComponent className="lg:hidden block" link="/login">Login</DropDownLinkComponent>
