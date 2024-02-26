@@ -81,7 +81,7 @@ export default function MovieListComponent({title, list}:propsType):ReactNode {
 
   // Returning JSX
   return (
-    <div>
+    <div> 
       <div className="flex items-center justify-between flex-wrap gap-[20px]">
           <TitleComponent noMargin tier={0}>{`${title[0].toUpperCase()}${title.slice(1, title.length)}`}</TitleComponent>
           <ButtonComponent onClick={() => {
@@ -96,6 +96,22 @@ export default function MovieListComponent({title, list}:propsType):ReactNode {
             }
           </ButtonComponent>
         </div>
+        {
+        (list && list.length !== 0)
+          ? (
+            <div className="flex items-center justify-between gap-[20px] flex-wrap mb-[20px]">
+              <TitleComponent 
+                noMargin 
+                tier={1}
+              >
+                All stars : {list?.map((item:dataType) => Number(item.score)).reduce((first:number, second:number) => first + second)} ⭐
+              </TitleComponent>
+              <TitleComponent noMargin tier={1}>
+                Total {title} : {list.length}
+              </TitleComponent>
+            </div>
+          ) : false
+        }
         {  
           (isFormShowing)
             ? (
@@ -135,21 +151,7 @@ export default function MovieListComponent({title, list}:propsType):ReactNode {
                 </>
               ) : <TitleComponent tier={2}>There is nothing to show</TitleComponent>
           }  
-        </ul>
-        {
-          (list && list.length !== 0)
-            ? <TitleComponent 
-                noMargin 
-                tier={1}
-                className="text-center"
-              >
-              All stars : 
-              {
-                list?.map((item:dataType) => Number(item.score))
-                .reduce((first:number, second:number) => first + second)}⭐
-              </TitleComponent>
-            : false
-        }
+        </ul> 
     </div>
   );
 }
