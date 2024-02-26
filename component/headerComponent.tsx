@@ -20,7 +20,7 @@ interface propsType {
 export default function HeaderComponent({loggedIn}:propsType):ReactNode {
   // Returning JSX
   return (
-    <header className="dark:bg-darkBg/30 bg-lightBg/30 lg:fixed static top-0 left-0 w-full z-20 backdrop-blur-xl">
+    <header className="dark:bg-darkBg/30 bg-lightBg/30 lg:fixed relative top-0 left-0 w-full z-20 backdrop-blur-xl">
       <ContainerComponent size="large" className="flex items-center justify-between gap-[20px]">
         <Link href={'/'}>
           <TitleComponent noMargin tier={1}>WatchLog</TitleComponent>
