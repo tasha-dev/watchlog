@@ -20,7 +20,7 @@ import useFirebaseAuth from "@/hook/useFirebaseAuth";
 interface dataType {
   name: string;
   score: number;
-  addedDate: Date;
+  addedDate: string;
 }
 
 interface propsType {
@@ -140,8 +140,9 @@ export default function MovieListComponent({title, list}:propsType):ReactNode {
               ? (
                 <>
                   {
-                    list.map((item:dataType) => (
+                    list.map((item:dataType, index) => (
                       <MovieItemComponent 
+                        key={index}
                         name={item.name} 
                         score={item.score} 
                         addedDate={item.addedDate}
