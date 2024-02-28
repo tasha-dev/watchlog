@@ -7,16 +7,24 @@ import { ReactNode } from "react";
 import TitleComponent from "./titleComponent";
 import IconComponent from "./iconComponent";
 import useFirebaseAuth from "@/hook/useFirebaseAuth";
+import { DataSnapshot, getDatabase, onValue, ref, set } from "firebase/database";
 
-// Defining type of props
+// Defining types
 interface propsType {
   name: string;
   score: number;
   addedDate: string;
+  type: 'movies' | 'series';
+}
+
+interface movieType {
+  addedDate: string;
+  name: string;
+  score: number;
 }
 
 // Creatnig and exporting movie item component as default
-export default function MovieItemComponent({name, score, addedDate}:propsType):ReactNode {
+export default function MovieItemComponent({name, type, score, addedDate}:propsType):ReactNode {
   // Defining firebase
   const auth = useFirebaseAuth();
 
@@ -33,7 +41,19 @@ export default function MovieItemComponent({name, score, addedDate}:propsType):R
       <button 
         className="w-[50px] h-[50px] aspect-square shrink-0 flex items-center justify-center rounded-[10px] bg-red-600 text-white"
         onClick={() => {
-          console.log(auth.user?.uid)
+          const db = getDatabase();
+          const dbRef = ref(db, `/${type}/${auth?.user.uid}`);
+          let data:movieType[];
+
+          onValue(dbRef, (snapshot:DataSnapshot) => {
+            const val = snapshot.val();
+            if (val) {
+              const oldData:movieType[] = Object.values(val);
+
+              data = oldData.filter((item) => item.name !== name);
+              set(dbRef, data);
+            }
+          })
         }}
       >
         <IconComponent size={20} name="bin"/>

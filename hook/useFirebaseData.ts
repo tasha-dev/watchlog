@@ -17,14 +17,13 @@ type propType = 'movies' | 'series';
 // Creating and exporting use firebase movie hook as default
 export default function useFirebaseData(type:propType):{
   loading: boolean,
-  data: movieType[] | undefined
+  data: movieType[] | []
 } {
   // Defining states of component
   const [isLoading, setLoading] = useState<boolean>(true);
-  const [data, setData] = useState<movieType[] | undefined>();
+  const [data, setData] = useState<movieType[] | []>([]);
 
   // Defining firebase
-  const app = useFirebaseApp();
   const auth = useFirebaseAuth();
 
   // Using useEffect to set states
@@ -37,7 +36,9 @@ export default function useFirebaseData(type:propType):{
       onValue(dbRef, (snapshot:DataSnapshot) => {
         const value = snapshot.val();
 
-        setData(Object.values(value))
+        if (value !== null || undefined) {
+          setData(Object.values(value))
+        }
       })
 
       setLoading(false);

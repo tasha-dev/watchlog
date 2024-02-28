@@ -141,7 +141,8 @@ export default function MovieListComponent({title, list}:propsType):ReactNode {
                 <>
                   {
                     list.map((item:dataType, index) => (
-                      <MovieItemComponent 
+                      <MovieItemComponent
+                        type={title}
                         key={index}
                         name={item.name} 
                         score={item.score} 
