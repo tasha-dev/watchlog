@@ -26,6 +26,7 @@ interface dataType {
 interface propsType {
   title: 'movies' | 'series';
   list: dataType[] | undefined;
+  objectNames: string[];
 }
 
 // Defining type of form
@@ -37,7 +38,7 @@ const formSchema = z.object({
 type formType = z.infer<typeof formSchema>;
 
 // Creating and exporting move list comonent as default
-export default function MovieListComponent({title, list}:propsType):ReactNode {
+export default function MovieListComponent({title, list, objectNames}:propsType):ReactNode {
   // Defining state of component
   const [isFormShowing, setFormShowing] = useState<boolean>(false);
   const [isValidating, setValidating] = useState<boolean>(false);
@@ -147,6 +148,7 @@ export default function MovieListComponent({title, list}:propsType):ReactNode {
                         name={item.name} 
                         score={item.score} 
                         addedDate={item.addedDate}
+                        objectName={objectNames[index]}
                       />
                     ))
                   }

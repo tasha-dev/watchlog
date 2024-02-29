@@ -35,7 +35,7 @@ export default function LoggedInHomePage():ReactNode {
               <div className="h-[300px] flex items-center justify-center">
                  <LoadingComponent />
               </div>
-            ) : <MovieListComponent list={movies.data} title="movies" />
+            ) : <MovieListComponent objectNames={movies.names} list={movies.data} title="movies" />
         } 
         <div className="my-[20px] w-full h-[1px] dark:bg-lightBorder bg-darkBorder" />
         {
@@ -44,7 +44,7 @@ export default function LoggedInHomePage():ReactNode {
               <div className="h-[300px] flex items-center justify-center">
                  <LoadingComponent />
               </div>
-            ) : <MovieListComponent list={series.data} title="series" />
+            ) : <MovieListComponent objectNames={series.names} list={series.data} title="series" />
         }
       </ContainerComponent>
     </section>

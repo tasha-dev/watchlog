@@ -17,11 +17,13 @@ type propType = 'movies' | 'series';
 // Creating and exporting use firebase movie hook as default
 export default function useFirebaseData(type:propType):{
   loading: boolean,
-  data: movieType[] | []
+  data: movieType[] | [],
+  names: string[] | []
 } {
   // Defining states of component
   const [isLoading, setLoading] = useState<boolean>(true);
   const [data, setData] = useState<movieType[] | []>([]);
+  const [names, setNames] = useState<string[] | []>([]);
 
   // Defining firebase
   const auth = useFirebaseAuth();
@@ -34,10 +36,14 @@ export default function useFirebaseData(type:propType):{
       const dbRef = ref(db, `${type}/${uid}`);
 
       onValue(dbRef, (snapshot:DataSnapshot) => {
-        const value = snapshot.val();
-
-        if (value !== null || undefined) {
-          setData(Object.values(value))
+        const val = snapshot.val();
+        
+        if (val !== null) {
+          setData(Object.values(val));
+          setNames(Object.keys(val));
+        } else {
+          setData([]);
+          setNames([]);
         }
       })
 
@@ -48,6 +54,7 @@ export default function useFirebaseData(type:propType):{
   // Returning values
   return {
     loading: isLoading,
-    data: data
+    data: data,
+    names: names
   };
 }
