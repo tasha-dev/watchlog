@@ -1,7 +1,7 @@
 # 📺 WatchLog
 
 **WatchLog** is a simple cloud-synced watchlist app that lets users track and rate movies or TV series from anywhere.  
-It uses **Firebase Authentication (OTP Login)** and **Cloud Firestore** for storing watch history securely online.
+It uses **Firebase Authentication** and **Cloud Firestore** for storing watch history securely online.
 
 ✅ Track watched movies & series  
 ✅ Rate titles (1–5 ⭐)  
@@ -15,7 +15,6 @@ It uses **Firebase Authentication (OTP Login)** and **Cloud Firestore** for stor
 
 | Feature          | Description                                       |
 | ---------------- | ------------------------------------------------- |
-| 🔐 Secure Login  | Phone-number login using Firebase OTP             |
 | ☁️ Cloud Sync    | All data is saved in Firestore under user account |
 | ⭐ Rating System | Up to 5 stars per title                           |
 | 📁 TXT Import    | Upload `.txt` file to bulk add items              |
@@ -49,7 +48,6 @@ WatchLog will automatically parse each line, detect rating based on ⭐ count, a
 
 - **Next.js 14**
 - **TypeScript**
-- **Firebase Auth** (OTP Login)
 - **Cloud Firestore**
 - **TailwindCSS**
 - **Radix UI** for components (optional)

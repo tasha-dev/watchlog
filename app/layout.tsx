@@ -7,6 +7,7 @@ import { JSX } from "react";
 import { cn } from "@/lib/util";
 import "@/style/globals.css";
 import { ThemeProvider } from "next-themes";
+import { Toaster } from "@/component/ui/sonner";
 
 // Defining metadata
 export const metadata: Metadata = {
@@ -66,7 +67,10 @@ export default function RootLayout({ children }: RootLayoutProps): JSX.Element {
           MontserratFont.className,
         )}
       >
-        <ThemeProvider>{children}</ThemeProvider>
+        <ThemeProvider>
+          <Toaster position="top-center" />
+          {children}
+        </ThemeProvider>
       </body>
     </html>
   );
