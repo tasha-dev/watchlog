@@ -15,3 +15,8 @@ export interface DialogProps {
   open?: boolean;
   onOpenChange?: (open: boolean) => void;
 }
+
+export interface FilterDropdownProps {
+  filter: string;
+  setFilter: (value: string) => void;
+}
