@@ -9,7 +9,7 @@ export default function HomePage(): JSX.Element {
   return (
     <>
       <Header className="h-[70px]" />
-      <div className="h-[calc(100dvh-70px)] w-dvw flex items-center justify-center overflow-hidden text-foreground">
+      <div className="h-[calc(100dvh-70px)] w-dvw flex items-center justify-center overflow-hidden text-foreground p-5">
         <div></div>
       </div>
     </>

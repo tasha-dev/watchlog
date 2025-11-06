@@ -1,11 +1,16 @@
 // Codes by mahdi tasha
 // Importing part
 import { JSX } from "react";
-import { Dialog, DialogContent } from "./ui/dialog";
+import {
+  Dialog,
+  DialogContent,
+  DialogDescription,
+  DialogTitle,
+} from "./ui/dialog";
 import { DialogProps } from "@/type/component";
 
 // Creating and exporting AuthDialog component as default
-export default function AuthDialg({
+export default function AuthDialog({
   onOpenChange,
   open,
 }: DialogProps): JSX.Element {
@@ -13,7 +18,8 @@ export default function AuthDialg({
   return (
     <Dialog open={open} onOpenChange={onOpenChange}>
       <DialogContent>
-        <h1>HELLO WORLD</h1>
+        <DialogTitle>AUTH</DialogTitle>
+        <DialogDescription>AUTH</DialogDescription>
       </DialogContent>
     </Dialog>
   );

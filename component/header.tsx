@@ -9,26 +9,40 @@ import LogoImage from "@/image/logo.png";
 import { HeaderProps } from "@/type/component";
 import { Button } from "./ui/button";
 import { cn } from "@/lib/util";
-import { Code, LogIn, SunMoon } from "lucide-react";
+import { Code, LogIn, LogOut, SunMoon } from "lucide-react";
 import { useTheme } from "next-themes";
 import { Tooltip, TooltipContent, TooltipTrigger } from "./ui/tooltip";
-import AuthDialg from "./authDialog";
+import AuthDialog from "./authDialog";
 
 // Creating and exporting Header component as default
 export default function Header({ className }: HeaderProps): JSX.Element {
   // Defining hooks
   const { setTheme } = useTheme();
   const [authDialogOpened, setAuthDialogOpened] = useState<boolean>(false);
+  const userLoggedIn = false; // TODO: FETCH API HERE
+
+  // Handling Auth and log out button onClick Event
+  const AuthLogOutHandler = () => {
+    if (userLoggedIn) {
+    } else {
+      setAuthDialogOpened(true);
+    }
+  };
 
   // Returning JSX
   return (
     <header
       className={cn(
-        "flex items-center justify-between gap-4 max-w-4xl px-3 mx-auto",
+        "flex items-center justify-between gap-4 max-w-4xl px-5 mx-auto",
         className,
       )}
     >
-      <AuthDialg open={authDialogOpened} onOpenChange={setAuthDialogOpened} />
+      {!userLoggedIn && (
+        <AuthDialog
+          open={authDialogOpened}
+          onOpenChange={setAuthDialogOpened}
+        />
+      )}
       <Link href="/">
         <Image
           alt="WatchLog logo"
@@ -46,13 +60,18 @@ export default function Header({ className }: HeaderProps): JSX.Element {
               Mahdi Tasha
             </Link>
           </Button>
-          <Button
-            size={"lg"}
-            variant={"outline"}
-            onClick={() => setAuthDialogOpened(true)}
-          >
-            <LogIn />
-            Auth
+          <Button size={"lg"} variant={"outline"} onClick={AuthLogOutHandler}>
+            {userLoggedIn ? (
+              <>
+                <LogOut />
+                Log Out
+              </>
+            ) : (
+              <>
+                <LogIn />
+                Auth
+              </>
+            )}
           </Button>
         </div>
         <div className="lg:hidden flex items-center justify-between gap-2">
@@ -71,12 +90,12 @@ export default function Header({ className }: HeaderProps): JSX.Element {
               <Button
                 size={"icon-lg"}
                 variant={"outline"}
-                onClick={() => setAuthDialogOpened(true)}
+                onClick={AuthLogOutHandler}
               >
-                <LogIn />
+                {userLoggedIn ? <LogOut /> : <LogIn />}
               </Button>
             </TooltipTrigger>
-            <TooltipContent>Auth</TooltipContent>
+            <TooltipContent>{userLoggedIn ? "Log Out" : "Auth"}</TooltipContent>
           </Tooltip>
         </div>
         <Tooltip>
