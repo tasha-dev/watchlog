@@ -1,36 +1,68 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# 📺 WatchLog
 
-## Getting Started
+**WatchLog** is a simple cloud-synced watchlist app that lets users track and rate movies or TV series from anywhere.  
+It uses **Firebase Authentication (OTP Login)** and **Cloud Firestore** for storing watch history securely online.
 
-First, run the development server:
+✅ Track watched movies & series  
+✅ Rate titles (1–5 ⭐)  
+✅ Access from any device  
+✅ Import watchlist from `.txt` file  
+✅ Modern and fast UI (Next.js + Tailwind)
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+---
+
+## 🚀 Features
+
+| Feature          | Description                                       |
+| ---------------- | ------------------------------------------------- |
+| 🔐 Secure Login  | Phone-number login using Firebase OTP             |
+| ☁️ Cloud Sync    | All data is saved in Firestore under user account |
+| ⭐ Rating System | Up to 5 stars per title                           |
+| 📁 TXT Import    | Upload `.txt` file to bulk add items              |
+| ⚛️ Built with    | Next.js, React, Firebase, TailwindCSS, TypeScript |
+
+---
+
+## 📦 TXT Import Format
+
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+N = index number
+MSN = Movie or Series name
+SN = star emojis (⭐) up to 5
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+Format:
+N_MSN SN
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+Example:
+1_Interstellar ⭐⭐⭐⭐⭐
+2_You ⭐⭐⭐⭐
+3_Harry_Potter ⭐⭐⭐
 
-## Learn More
+```
 
-To learn more about Next.js, take a look at the following resources:
+WatchLog will automatically parse each line, detect rating based on ⭐ count, and store items in Firestore.
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+---
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+## 🏗️ Tech Stack
 
-## Deploy on Vercel
+- **Next.js 14**
+- **TypeScript**
+- **Firebase Auth** (OTP Login)
+- **Cloud Firestore**
+- **TailwindCSS**
+- **Radix UI** for components (optional)
+- **Vercel** (recommended hosting)
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+---
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+## 📝 License
+
+MIT License — free to use and modify.
+
+---
+
+## 👑 Author
+
+Built with ❤️ by **Mahdi Tasha**

@@ -1,7 +1,9 @@
+// Codes by mahdi tasha
+// Imporing part
 import type { NextConfig } from "next";
 
-const nextConfig: NextConfig = {
-  /* config options here */
-};
+// Defining configs of next js
+const nextConfig: NextConfig = {};
 
+// Exoporting the configs
 export default nextConfig;
