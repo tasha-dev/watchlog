@@ -1,0 +1,99 @@
+// Forcing next.js to render this component as client side component
+"use client";
+
+// Importing part
+import Image from "next/image";
+import Link from "next/link";
+import { JSX, useState } from "react";
+import LogoImage from "@/image/logo.png";
+import { HeaderProps } from "@/type/component";
+import { Button } from "./ui/button";
+import { cn } from "@/lib/util";
+import { Code, LogIn, SunMoon } from "lucide-react";
+import { useTheme } from "next-themes";
+import { Tooltip, TooltipContent, TooltipTrigger } from "./ui/tooltip";
+import AuthDialg from "./authDialog";
+
+// Creating and exporting Header component as default
+export default function Header({ className }: HeaderProps): JSX.Element {
+  // Defining hooks
+  const { setTheme } = useTheme();
+  const [authDialogOpened, setAuthDialogOpened] = useState<boolean>(false);
+
+  // Returning JSX
+  return (
+    <header
+      className={cn(
+        "flex items-center justify-between gap-4 max-w-4xl px-3 mx-auto",
+        className,
+      )}
+    >
+      <AuthDialg open={authDialogOpened} onOpenChange={setAuthDialogOpened} />
+      <Link href="/">
+        <Image
+          alt="WatchLog logo"
+          width={100}
+          height={100}
+          src={LogoImage.src}
+          className="size-10 block w-fit dark:invert"
+        />
+      </Link>
+      <div className="flex items-center justify-between gap-2">
+        <div className="lg:flex hidden items-center justify-between gap-2">
+          <Button size="lg" variant={"outline"} asChild>
+            <Link href="https://tasha.vercel.app">
+              <Code />
+              Mahdi Tasha
+            </Link>
+          </Button>
+          <Button
+            size={"lg"}
+            variant={"outline"}
+            onClick={() => setAuthDialogOpened(true)}
+          >
+            <LogIn />
+            Auth
+          </Button>
+        </div>
+        <div className="lg:hidden flex items-center justify-between gap-2">
+          <Tooltip>
+            <TooltipTrigger asChild>
+              <Button size="icon-lg" variant={"outline"} asChild>
+                <Link href="https://tasha.vercel.app">
+                  <Code />
+                </Link>
+              </Button>
+            </TooltipTrigger>
+            <TooltipContent>Mahdi Tasha</TooltipContent>
+          </Tooltip>
+          <Tooltip>
+            <TooltipTrigger asChild>
+              <Button
+                size={"icon-lg"}
+                variant={"outline"}
+                onClick={() => setAuthDialogOpened(true)}
+              >
+                <LogIn />
+              </Button>
+            </TooltipTrigger>
+            <TooltipContent>Auth</TooltipContent>
+          </Tooltip>
+        </div>
+        <Tooltip>
+          <TooltipTrigger asChild>
+            <Button
+              variant={"outline"}
+              size={"icon-lg"}
+              onClick={() => {
+                setTheme((prev) => (prev === "light" ? "dark" : "light"));
+              }}
+            >
+              <SunMoon />
+            </Button>
+          </TooltipTrigger>
+          <TooltipContent>Toggle Theme</TooltipContent>
+        </Tooltip>
+      </div>
+    </header>
+  );
+}

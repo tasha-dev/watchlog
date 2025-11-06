@@ -6,3 +6,12 @@ import { ReactNode } from "react";
 export interface RootLayoutProps {
   children: ReactNode;
 }
+
+export interface HeaderProps {
+  className?: string;
+}
+
+export interface DialogProps {
+  open?: boolean;
+  onOpenChange?: (open: boolean) => void;
+}
