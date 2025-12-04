@@ -20,3 +20,14 @@ export interface FilterDropdownProps {
   filter: string;
   setFilter: (value: string) => void;
 }
+
+export interface ListItemProps {
+  className?: string;
+  data: {
+    index: number;
+    title: string;
+    stars: number;
+    createdAt: string;
+    id: number;
+  };
+}
