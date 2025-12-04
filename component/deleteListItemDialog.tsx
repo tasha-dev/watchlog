@@ -17,13 +17,13 @@ import { Button } from "./ui/button";
 import { Loader2, Trash } from "lucide-react";
 import { sleep } from "@/lib/util";
 import { toast } from "sonner";
-import { ListItemDialogProps } from "@/type/component";
 import { JSX, useState } from "react";
+import { DeleteListItemDialogProps } from "@/type/component";
 
 // Creating and exporting DeleteListItemDialog component as default
 export default function DeleteListItemDialog({
   id,
-}: ListItemDialogProps): JSX.Element {
+}: DeleteListItemDialogProps): JSX.Element {
   // Defining hooks
   const [open, setOpened] = useState<boolean>(false);
   const [loading, setLoading] = useState<boolean>(false);
