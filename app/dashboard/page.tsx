@@ -6,55 +6,13 @@
 import AddListItemDialog from "@/component/addListItemDialog";
 import FilterDropdown from "@/component/filterDropdown";
 import Header from "@/component/header";
+import ImportDialog from "@/component/importDialog";
 import ListItem from "@/component/listItem";
 import { Filters, ListItemData } from "@/type/component";
 import { JSX, useState } from "react";
 
 // Defining gake data to render
-const data: ListItemData[] = [
-  {
-    index: 0,
-    id: 0,
-    title: "The Shawshank Redemption",
-    stars: 5,
-    createdAt: "2024-01-12T14:22:00.000Z",
-  },
-  {
-    index: 1,
-    id: 1,
-    title: "Inception",
-    stars: 4,
-    createdAt: "2024-02-03T20:10:00.000Z",
-  },
-  {
-    index: 2,
-    id: 2,
-    title: "Interstellar",
-    stars: 5,
-    createdAt: "2024-03-18T09:55:00.000Z",
-  },
-  {
-    index: 3,
-    id: 3,
-    title: "Fight Club",
-    stars: 4,
-    createdAt: "2024-04-21T17:30:00.000Z",
-  },
-  {
-    index: 4,
-    id: 4,
-    title: "The Godfather",
-    stars: 5,
-    createdAt: "2024-05-10T11:40:00.000Z",
-  },
-  {
-    index: 5,
-    id: 5,
-    title: "The Dark Knight",
-    stars: 5,
-    createdAt: "2024-06-02T08:15:00.000Z",
-  },
-];
+const data: ListItemData[] = [];
 
 // Creating and exporting Home page as default
 export default function HomePage(): JSX.Element {
@@ -104,6 +62,7 @@ export default function HomePage(): JSX.Element {
           <div className="flex items-center justify-end gap-3">
             <AddListItemDialog />
             <FilterDropdown filter={filter} setFilter={setFilter} />
+            <ImportDialog />
           </div>
         </div>
         <div className="space-y-5">

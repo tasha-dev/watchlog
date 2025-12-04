@@ -56,8 +56,8 @@ export default function Header({
           className="size-10 block w-fit dark:invert"
         />
       </Link>
-      <div className="flex items-center justify-between gap-2">
-        <div className="lg:flex hidden items-center justify-between gap-2">
+      <div className="flex items-center justify-between gap-3">
+        <div className="lg:flex hidden items-center justify-between gap-3">
           <Button
             size={inDashboard ? "icon-lg" : "lg"}
             variant={"outline"}

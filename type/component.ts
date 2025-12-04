@@ -51,3 +51,7 @@ export interface EditListItemDialogProps {
   name: string;
   stars: number;
 }
+
+export interface UploadProps {
+  onValueChange?: (file: File) => void;
+}
