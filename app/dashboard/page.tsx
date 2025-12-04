@@ -19,13 +19,13 @@ export default function HomePage(): JSX.Element {
       <Header className="py-4" />
       <div className="max-w-4xl p-5 mx-auto">
         <div className="flex items-center justify-between gap-3">
-          <div className="flex items-center justify-end gap-3">
-            <FilterDropdown filter={filter} setFilter={setFilter} />
-            <AddListItemDialog />
-          </div>
-          <span className="font-semibold text-base text-right flex-1 truncate block">
-            Your List
+          <span className="font-semibold text-2xl text-left flex-1 truncate block">
+            List
           </span>
+          <div className="flex items-center justify-end gap-3">
+            <AddListItemDialog />
+            <FilterDropdown filter={filter} setFilter={setFilter} />
+          </div>
         </div>
       </div>
     </>

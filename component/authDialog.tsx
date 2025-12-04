@@ -30,6 +30,7 @@ import { DialogClose } from "@radix-ui/react-dialog";
 import { sleep } from "@/lib/util";
 import { Loader2 } from "lucide-react";
 import { toast } from "sonner";
+import { useRouter } from "next/navigation";
 
 // Defining form scheama
 const formSchema = z.object({
@@ -55,6 +56,7 @@ export default function AuthDialog({
   open,
 }: DialogProps): JSX.Element {
   // Defining hooks
+  const router = useRouter();
   const form = useForm<formType>({
     resolver: zodResolver(formSchema),
   });
@@ -63,6 +65,8 @@ export default function AuthDialog({
   const submitHandler: SubmitHandler<formType> = async (data) => {
     await sleep(3000);
     toast.success("Welcom to watchlog");
+    router.push("/dashboard");
+    onOpenChange?.(false);
   };
 
   // Returning JSX

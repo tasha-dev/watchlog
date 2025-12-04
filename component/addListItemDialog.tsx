@@ -1,6 +1,6 @@
 // Codes by mahdi tasha
 // Importing part
-import { JSX } from "react";
+import { JSX, useState } from "react";
 import {
   Dialog,
   DialogContent,
@@ -52,6 +52,7 @@ type formType = z.infer<typeof formSchema>;
 // Creating and exporting AddListItemDialog component as default
 export default function AddListItemDialog(): JSX.Element {
   // Defining hooks
+  const [open, setOpened] = useState<boolean>(false);
   const form = useForm<formType>({
     resolver: zodResolver(formSchema),
   });
@@ -59,12 +60,13 @@ export default function AddListItemDialog(): JSX.Element {
   // Handling submitEvent
   const submitHandler: SubmitHandler<formType> = async (data) => {
     await sleep(3000);
-    toast.success("Welcom to watchlog");
+    toast.success(`${data.name} Is now added to your watched list`);
+    setOpened(false);
   };
 
   // Returning JSX
   return (
-    <Dialog>
+    <Dialog open={open} onOpenChange={setOpened}>
       <DialogTrigger asChild>
         <Button variant={"outline"}>
           <Plus />
@@ -110,6 +112,8 @@ export default function AddListItemDialog(): JSX.Element {
                   <FormControl>
                     <Input
                       type="number"
+                      min={1}
+                      max={5}
                       placeholder="At least 1 and at most 5"
                       {...field}
                     />
