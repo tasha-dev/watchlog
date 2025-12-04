@@ -66,19 +66,25 @@ export default function HomePage(): JSX.Element {
           </div>
         </div>
         <div className="space-y-5">
-          {dataToRender.map((item, index) => (
-            <ListItem
-              key={index}
-              className="w-full"
-              data={{
-                createdAt: item.createdAt,
-                id: item.id,
-                index: index + 1,
-                stars: item.stars,
-                title: item.title,
-              }}
-            />
-          ))}
+          {dataToRender.length === 0 ? (
+            <span className="font-bold lg:text-3xl text-2xl text-current text-center truncate block">
+              There is nothing to show
+            </span>
+          ) : (
+            dataToRender.map((item, index) => (
+              <ListItem
+                key={index}
+                className="w-full"
+                data={{
+                  createdAt: item.createdAt,
+                  id: item.id,
+                  index: index + 1,
+                  stars: item.stars,
+                  title: item.title,
+                }}
+              />
+            ))
+          )}
         </div>
       </div>
     </>
