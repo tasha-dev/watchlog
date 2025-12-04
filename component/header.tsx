@@ -16,7 +16,10 @@ import { Tooltip, TooltipContent, TooltipTrigger } from "./ui/tooltip";
 import AuthDialog from "./authDialog";
 
 // Creating and exporting Header component as default
-export default function Header({ className }: HeaderProps): JSX.Element {
+export default function Header({
+  className,
+  inDashboard = false,
+}: HeaderProps): JSX.Element {
   // Defining hooks
   const { setTheme } = useTheme();
   const [authDialogOpened, setAuthDialogOpened] = useState<boolean>(false);
@@ -55,22 +58,30 @@ export default function Header({ className }: HeaderProps): JSX.Element {
       </Link>
       <div className="flex items-center justify-between gap-2">
         <div className="lg:flex hidden items-center justify-between gap-2">
-          <Button size="lg" variant={"outline"} asChild>
+          <Button
+            size={inDashboard ? "icon-lg" : "lg"}
+            variant={"outline"}
+            asChild
+          >
             <Link href="https://tasha.vercel.app">
               <Code />
-              Mahdi Tasha
+              {!inDashboard && "Mahdi Tasha"}
             </Link>
           </Button>
-          <Button size={"lg"} variant={"outline"} onClick={AuthLogOutHandler}>
+          <Button
+            size={inDashboard ? "icon-lg" : "lg"}
+            variant={"outline"}
+            onClick={AuthLogOutHandler}
+          >
             {userLoggedIn ? (
               <>
                 <LogOut />
-                Log Out
+                {!inDashboard && "Log Out"}
               </>
             ) : (
               <>
                 <LogIn />
-                Auth
+                {!inDashboard && "Auth"}
               </>
             )}
           </Button>

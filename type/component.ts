@@ -8,6 +8,7 @@ export interface RootLayoutProps {
 }
 
 export interface HeaderProps {
+  inDashboard?: boolean;
   className?: string;
 }
 
@@ -16,9 +17,16 @@ export interface DialogProps {
   onOpenChange?: (open: boolean) => void;
 }
 
+export type Filters =
+  | "all"
+  | "most-stars"
+  | "least-stars"
+  | "createdAt"
+  | "alphabetic";
+
 export interface FilterDropdownProps {
-  filter: string;
-  setFilter: (value: string) => void;
+  filter: Filters;
+  setFilter: (value: Filters) => void;
 }
 
 export interface ListItemProps {
@@ -30,4 +38,8 @@ export interface ListItemProps {
     createdAt: string;
     id: number;
   };
+}
+
+export interface DeleteListItemDialogProps {
+  id: number;
 }

@@ -5,7 +5,10 @@
 // Importing part
 import { cn } from "@/lib/util";
 import { ListItemProps } from "@/type/component";
+import { Circle, Pen, Trash } from "lucide-react";
 import { JSX } from "react";
+import { Button } from "./ui/button";
+import DeleteListItemDialog from "./deleteListItemDialog";
 
 // Creating and exporting ListItem component as defualt
 export default function ListItem({
@@ -14,8 +17,29 @@ export default function ListItem({
 }: ListItemProps): JSX.Element {
   // Returning JSX
   return (
-    <div className={cn("", className)}>
-      <span>HI</span>
+    <div
+      className={cn(
+        "border rounded-md p-3 flex text-foreground items-center justify-between gap-3",
+        className,
+      )}
+    >
+      <div className="flex items-center justify-start gap-3 flex-1">
+        <div className="flex items-center justify-start gap-3 shrink-0">
+          <Circle className="fill-current text-current size-4 shrink-0" />
+          <span className="text-current block text-left truncate text-lg font-semibold">
+            {data.index}
+          </span>
+        </div>
+        <span className="text-left truncate block text-base text-current font-semibold">
+          {data.title}
+        </span>
+      </div>
+      <div className="flex items-center justify-end gap-3 shrink-0">
+        <Button size={"icon-lg"} variant={"secondary"}>
+          <Pen />
+        </Button>
+        <DeleteListItemDialog id={data.id} />
+      </div>
     </div>
   );
 }

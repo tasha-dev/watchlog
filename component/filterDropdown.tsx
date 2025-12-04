@@ -10,13 +10,16 @@ import {
   DropdownMenuRadioItem,
 } from "@/component/ui/dropdown-menu";
 import { Button } from "@/component/ui/button";
-import { FilterDropdownProps } from "@/type/component";
+import { FilterDropdownProps, Filters } from "@/type/component";
 import { DropdownMenuRadioGroup } from "@radix-ui/react-dropdown-menu";
 import { Filter } from "lucide-react";
 import { JSX } from "react";
 
 // Defining filters
-const filters = [
+const filters: {
+  label: string;
+  value: Filters;
+}[] = [
   {
     label: "All",
     value: "all",
@@ -54,7 +57,10 @@ export default function FilterDropdown({
         </Button>
       </DropdownMenuTrigger>
       <DropdownMenuContent align="end" sideOffset={10}>
-        <DropdownMenuRadioGroup value={filter} onValueChange={setFilter}>
+        <DropdownMenuRadioGroup
+          value={filter}
+          onValueChange={(val) => setFilter(val as Filters)}
+        >
           {filters.map((item, index) => (
             <DropdownMenuRadioItem
               value={item.value}
