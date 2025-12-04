@@ -29,15 +29,17 @@ export interface FilterDropdownProps {
   setFilter: (value: Filters) => void;
 }
 
+export interface ListItemData {
+  index: number;
+  title: string;
+  stars: number;
+  createdAt: string;
+  id: number;
+}
+
 export interface ListItemProps {
   className?: string;
-  data: {
-    index: number;
-    title: string;
-    stars: number;
-    createdAt: string;
-    id: number;
-  };
+  data: ListItemData;
 }
 
 export interface DeleteListItemDialogProps {

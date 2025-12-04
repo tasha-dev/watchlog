@@ -74,7 +74,7 @@ export default function AddListItemDialog(): JSX.Element {
       </DialogTrigger>
       <DialogContent>
         <DialogHeader>
-          <DialogTitle>Add new item to you Watchlog!</DialogTitle>
+          <DialogTitle>Add new item to your Watchlog!</DialogTitle>
           <DialogDescription>
             Your watchlist is synced to the cloud, so you can access it anytime,
             on any device.
