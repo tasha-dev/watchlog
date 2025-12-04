@@ -98,7 +98,7 @@ export default function HomePage(): JSX.Element {
       <Header className="py-4" inDashboard />
       <div className="max-w-4xl p-5 mx-auto">
         <div className="flex items-center justify-between gap-3 mb-10">
-          <span className="font-semibold text-2xl text-left flex-1 truncate block">
+          <span className="font-semibold lg:text-2xl text-lg text-left flex-1 truncate block">
             List
           </span>
           <div className="flex items-center justify-end gap-3">
