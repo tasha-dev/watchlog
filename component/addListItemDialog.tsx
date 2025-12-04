@@ -66,10 +66,15 @@ export default function AddListItemDialog(): JSX.Element {
   // Returning JSX
   return (
     <Dialog open={open} onOpenChange={setOpened}>
-      <DialogTrigger asChild>
+      <DialogTrigger asChild className="lg:flex hidden">
         <Button variant={"outline"}>
           <Plus />
           Add New Item
+        </Button>
+      </DialogTrigger>
+      <DialogTrigger className="lg:hidden flex">
+        <Button variant={"outline"} size={"icon"}>
+          <Plus />
         </Button>
       </DialogTrigger>
       <DialogContent>

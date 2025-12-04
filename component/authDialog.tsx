@@ -110,6 +110,7 @@ export default function AuthDialog({
                   <FormLabel>Password :</FormLabel>
                   <FormControl>
                     <Input
+                      type="password"
                       placeholder="At least 8 character and at most 12 characters"
                       {...field}
                     />

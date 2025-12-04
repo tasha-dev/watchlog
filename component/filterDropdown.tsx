@@ -50,10 +50,15 @@ export default function FilterDropdown({
   // Returning JSX
   return (
     <DropdownMenu>
-      <DropdownMenuTrigger asChild>
+      <DropdownMenuTrigger asChild className="lg:flex hidden">
         <Button variant={"outline"}>
           <Filter />
           Filters
+        </Button>
+      </DropdownMenuTrigger>
+      <DropdownMenuTrigger className="lg:hidden flex">
+        <Button variant={"outline"} size={"icon"}>
+          <Filter />
         </Button>
       </DropdownMenuTrigger>
       <DropdownMenuContent align="end" sideOffset={10}>
