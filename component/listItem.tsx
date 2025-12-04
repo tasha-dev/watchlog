@@ -5,10 +5,10 @@
 // Importing part
 import { cn } from "@/lib/util";
 import { ListItemProps } from "@/type/component";
-import { Circle, Pen, Trash } from "lucide-react";
+import { Circle } from "lucide-react";
 import { JSX } from "react";
-import { Button } from "./ui/button";
 import DeleteListItemDialog from "./deleteListItemDialog";
+import EditListItemDialog from "./editListItemDialog";
 
 // Creating and exporting ListItem component as defualt
 export default function ListItem({
@@ -35,9 +35,7 @@ export default function ListItem({
         </span>
       </div>
       <div className="flex items-center justify-end gap-3 shrink-0">
-        <Button size={"icon-lg"} variant={"secondary"}>
-          <Pen />
-        </Button>
+        <EditListItemDialog id={data.id} name={data.title} stars={data.stars} />
         <DeleteListItemDialog id={data.id} />
       </div>
     </div>

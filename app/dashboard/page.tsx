@@ -40,6 +40,38 @@ export default function HomePage(): JSX.Element {
               title: "The Shawshang Redemption",
             }}
           />
+          <ListItem
+            className="w-full"
+            data={{
+              createdAt: new Date().toISOString(),
+              id: 1,
+              index: 1,
+              stars: 5,
+              title: "The Shawshang Redemption",
+            }}
+          />
+
+          <ListItem
+            className="w-full"
+            data={{
+              createdAt: new Date().toISOString(),
+              id: 1,
+              index: 1,
+              stars: 5,
+              title: "The Shawshang Redemption",
+            }}
+          />
+
+          <ListItem
+            className="w-full"
+            data={{
+              createdAt: new Date().toISOString(),
+              id: 1,
+              index: 1,
+              stars: 5,
+              title: "The Shawshang Redemption",
+            }}
+          />
         </div>
       </div>
     </>

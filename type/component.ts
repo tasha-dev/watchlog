@@ -43,3 +43,9 @@ export interface ListItemProps {
 export interface DeleteListItemDialogProps {
   id: number;
 }
+
+export interface EditListItemDialogProps {
+  id: number;
+  name: string;
+  stars: number;
+}
