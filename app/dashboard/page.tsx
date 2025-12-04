@@ -61,8 +61,8 @@ export default function HomePage(): JSX.Element {
           </span>
           <div className="flex items-center justify-end gap-3">
             <AddListItemDialog />
-            <FilterDropdown filter={filter} setFilter={setFilter} />
             <ImportDialog />
+            <FilterDropdown filter={filter} setFilter={setFilter} />
           </div>
         </div>
         <div className="space-y-5">
