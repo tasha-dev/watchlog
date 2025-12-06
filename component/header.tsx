@@ -14,6 +14,10 @@ import { Code, LogIn, LogOut, SunMoon } from "lucide-react";
 import { useTheme } from "next-themes";
 import { Tooltip, TooltipContent, TooltipTrigger } from "./ui/tooltip";
 import AuthDialog from "./authDialog";
+import useAuth from "@/hook/useAuth";
+import { Skeleton } from "./ui/skeleton";
+import { signOutUser } from "@/lib/firebase/auth";
+import { toast } from "sonner";
 
 // Creating and exporting Header component as default
 export default function Header({
@@ -23,11 +27,13 @@ export default function Header({
   // Defining hooks
   const { setTheme } = useTheme();
   const [authDialogOpened, setAuthDialogOpened] = useState<boolean>(false);
-  const userLoggedIn = false; // TODO: FETCH API HERE
+  const { isAuthenticated, loading } = useAuth();
 
   // Handling Auth and log out button onClick Event
-  const AuthLogOutHandler = () => {
-    if (userLoggedIn) {
+  const AuthLogOutHandler = async () => {
+    if (isAuthenticated) {
+      await signOutUser();
+      toast.success("You logged out :)");
     } else {
       setAuthDialogOpened(true);
     }
@@ -41,7 +47,7 @@ export default function Header({
         className,
       )}
     >
-      {!userLoggedIn && (
+      {!isAuthenticated && (
         <AuthDialog
           open={authDialogOpened}
           onOpenChange={setAuthDialogOpened}
@@ -68,23 +74,27 @@ export default function Header({
               {!inDashboard && "Mahdi Tasha"}
             </Link>
           </Button>
-          <Button
-            size={inDashboard ? "icon-lg" : "lg"}
-            variant={"outline"}
-            onClick={AuthLogOutHandler}
-          >
-            {userLoggedIn ? (
-              <>
-                <LogOut />
-                {!inDashboard && "Log Out"}
-              </>
-            ) : (
-              <>
-                <LogIn />
-                {!inDashboard && "Auth"}
-              </>
-            )}
-          </Button>
+          {loading ? (
+            <Skeleton className="h-10 rounded-md w-15" />
+          ) : (
+            <Button
+              size={inDashboard ? "icon-lg" : "lg"}
+              variant={"outline"}
+              onClick={AuthLogOutHandler}
+            >
+              {isAuthenticated ? (
+                <>
+                  <LogOut />
+                  {!inDashboard && "Log Out"}
+                </>
+              ) : (
+                <>
+                  <LogIn />
+                  {!inDashboard && "Auth"}
+                </>
+              )}
+            </Button>
+          )}
         </div>
         <div className="lg:hidden flex items-center justify-between gap-2">
           <Tooltip>
@@ -97,18 +107,24 @@ export default function Header({
             </TooltipTrigger>
             <TooltipContent>Mahdi Tasha</TooltipContent>
           </Tooltip>
-          <Tooltip>
-            <TooltipTrigger asChild>
-              <Button
-                size={"icon-lg"}
-                variant={"outline"}
-                onClick={AuthLogOutHandler}
-              >
-                {userLoggedIn ? <LogOut /> : <LogIn />}
-              </Button>
-            </TooltipTrigger>
-            <TooltipContent>{userLoggedIn ? "Log Out" : "Auth"}</TooltipContent>
-          </Tooltip>
+          {loading ? (
+            <Skeleton className="size-10 rounded-md" />
+          ) : (
+            <Tooltip>
+              <TooltipTrigger asChild>
+                <Button
+                  size={"icon-lg"}
+                  variant={"outline"}
+                  onClick={AuthLogOutHandler}
+                >
+                  {isAuthenticated ? <LogOut /> : <LogIn />}
+                </Button>
+              </TooltipTrigger>
+              <TooltipContent>
+                {isAuthenticated ? "Log Out" : "Auth"}
+              </TooltipContent>
+            </Tooltip>
+          )}
         </div>
         <Tooltip>
           <TooltipTrigger asChild>
