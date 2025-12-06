@@ -96,6 +96,7 @@ export default function ImportDialog(): JSX.Element {
               await sleep(5000);
 
               setLoading(false);
+              console.log(result);
               setOpened(false);
               toast.success("The contents are uploaded!");
             }}
