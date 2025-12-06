@@ -55,3 +55,8 @@ export interface EditListItemDialogProps {
 export interface UploadProps {
   onValueChange?: (file: File) => void;
 }
+
+export interface DashboardLayoutProps {
+  className?: string;
+  children?: ReactNode;
+}

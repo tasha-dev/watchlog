@@ -28,10 +28,10 @@ import {
 import { Input } from "./ui/input";
 import { Button } from "./ui/button";
 import { DialogClose } from "@radix-ui/react-dialog";
-import { sleep } from "@/lib/util";
 import { Loader2 } from "lucide-react";
 import { toast } from "sonner";
 import { useRouter } from "next/navigation";
+import { signInWithEmail, signUpWithEmail } from "@/lib/firebase/auth";
 
 // Defining form scheama
 const loginFormSchema = z.object({
@@ -87,12 +87,20 @@ export default function AuthDialog({
     resolver: zodResolver(signUpFormSchema),
   });
 
-  // Handling submitEvent
+  // Handling submitEvents
   const loginSubmitHandler: SubmitHandler<loginFormType> = async (data) => {
-    await sleep(3000);
-    toast.success("Welcom to watchlog");
-    router.push("/dashboard");
-    onOpenChange?.(false);
+    await signInWithEmail(data.email, data.password)
+      .then(() => {
+        toast.success("Welcom to watchlog");
+        router.push("/dashboard");
+        onOpenChange?.(false);
+      })
+      .catch(() => {
+        loginForm.setError("root", {
+          message:
+            "There was an error while logging in. please try again later.",
+        });
+      });
   };
 
   const signUpSubmitHandler: SubmitHandler<signupFormType> = async (data) => {
@@ -101,10 +109,18 @@ export default function AuthDialog({
         message: "The password and its repeat are not same in value",
       });
     } else {
-      await sleep(3000);
-      toast.success("Welcom to watchlog");
-      router.push("/dashboard");
-      onOpenChange?.(false);
+      await signUpWithEmail(data.email, data.password)
+        .then(() => {
+          toast.success("You are now part of watchlog. Enjoy :)");
+          router.push("/dashboard");
+          onOpenChange?.(false);
+        })
+        .catch(() => {
+          signupForm.setError("root", {
+            message:
+              "There was an error while logging in. please try again later.",
+          });
+        });
     }
   };
 
@@ -164,6 +180,9 @@ export default function AuthDialog({
                     </FormItem>
                   )}
                 />
+                <FormMessage>
+                  {loginForm.formState.errors.root?.message}
+                </FormMessage>
                 <DialogFooter>
                   <DialogClose asChild>
                     <Button
@@ -252,7 +271,9 @@ export default function AuthDialog({
                     </FormItem>
                   )}
                 />
-
+                <FormMessage>
+                  {signupForm.formState.errors.root?.message}
+                </FormMessage>
                 <DialogFooter>
                   <DialogClose asChild>
                     <Button
@@ -267,7 +288,7 @@ export default function AuthDialog({
                     disabled={signupForm.formState.isSubmitting}
                     type="submit"
                   >
-                    {loginForm.formState.isSubmitting ? (
+                    {signupForm.formState.isSubmitting ? (
                       <Loader2 className="animate-spin relative" />
                     ) : (
                       "Submit"

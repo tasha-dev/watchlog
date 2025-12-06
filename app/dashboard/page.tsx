@@ -5,8 +5,8 @@
 // Importing part
 import AddListItemDialog from "@/component/addListItemDialog";
 import FilterDropdown from "@/component/filterDropdown";
-import Header from "@/component/header";
 import ImportDialog from "@/component/importDialog";
+import DashboardLayout from "@/component/layout/dashboardLayout";
 import ListItem from "@/component/listItem";
 import { Filters, ListItemData } from "@/type/component";
 import { JSX, useState } from "react";
@@ -52,41 +52,38 @@ export default function HomePage(): JSX.Element {
 
   // Returning JSX
   return (
-    <>
-      <Header className="py-4" inDashboard />
-      <div className="max-w-4xl p-5 mx-auto">
-        <div className="flex items-center justify-between gap-3 mb-10">
-          <span className="font-semibold lg:text-2xl text-lg text-left flex-1 truncate block">
-            List
-          </span>
-          <div className="flex items-center justify-end gap-3">
-            <AddListItemDialog />
-            <ImportDialog />
-            <FilterDropdown filter={filter} setFilter={setFilter} />
-          </div>
-        </div>
-        <div className="space-y-5">
-          {dataToRender.length === 0 ? (
-            <span className="font-bold lg:text-3xl text-2xl text-current text-center truncate block">
-              There is nothing to show
-            </span>
-          ) : (
-            dataToRender.map((item, index) => (
-              <ListItem
-                key={index}
-                className="w-full"
-                data={{
-                  createdAt: item.createdAt,
-                  id: item.id,
-                  index: index + 1,
-                  stars: item.stars,
-                  title: item.title,
-                }}
-              />
-            ))
-          )}
+    <DashboardLayout>
+      <div className="flex items-center justify-between gap-3 mb-10">
+        <span className="font-semibold lg:text-2xl text-lg text-left flex-1 truncate block">
+          List
+        </span>
+        <div className="flex items-center justify-end gap-3">
+          <AddListItemDialog />
+          <ImportDialog />
+          <FilterDropdown filter={filter} setFilter={setFilter} />
         </div>
       </div>
-    </>
+      <div className="space-y-5">
+        {dataToRender.length === 0 ? (
+          <span className="font-bold lg:text-3xl text-2xl text-current text-center truncate block">
+            There is nothing to show
+          </span>
+        ) : (
+          dataToRender.map((item, index) => (
+            <ListItem
+              key={index}
+              className="w-full"
+              data={{
+                createdAt: item.createdAt,
+                id: item.id,
+                index: index + 1,
+                stars: item.stars,
+                title: item.title,
+              }}
+            />
+          ))
+        )}
+      </div>
+    </DashboardLayout>
   );
 }
